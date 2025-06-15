@@ -9,6 +9,7 @@ public static class DI
     {
         services.AddProblemDetails();
         services.AddExceptionHandler<ExceptionMiddleware>();
+        services.AddCorsPolicies();
         services.AddControllers();
         services.AddSwaggerWithVersioning();
 
