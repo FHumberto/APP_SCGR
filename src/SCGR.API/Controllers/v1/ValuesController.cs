@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 
-namespace SCGR.API.Controllers;
+namespace SCGR.API.Controllers.v1;
 
-[Route("api/[controller]")]
+[ApiVersion(1)]
 public class ValuesController : BaseController
 {
     [HttpGet]

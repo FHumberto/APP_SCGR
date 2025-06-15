@@ -1,4 +1,5 @@
-﻿using SCGR.API.Middlewares;
+﻿using SCGR.API.Extensions;
+using SCGR.API.Middlewares;
 
 namespace SCGR.API;
 
@@ -9,7 +10,7 @@ public static class DI
         services.AddProblemDetails();
         services.AddExceptionHandler<ExceptionMiddleware>();
         services.AddControllers();
-        services.AddOpenApi();
+        services.AddSwaggerWithVersioning();
 
         return services;
     }

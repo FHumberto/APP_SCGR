@@ -4,6 +4,7 @@ using SCGR.Domain.Abstractions.Errors;
 namespace SCGR.API.Controllers;
 
 [ApiController]
+[Route("api/v{v:apiVersion}/[controller]")]
 public class BaseController : ControllerBase
 {
     /// <summary>

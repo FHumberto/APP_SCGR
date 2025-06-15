@@ -1,4 +1,5 @@
 using SCGR.API;
+using SCGR.API.Extensions;
 using SCGR.Application;
 using SCGR.Infrastructure;
 
@@ -12,7 +13,7 @@ WebApplication? app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwaggerWithVersioning();
 }
 
 app.UseExceptionHandler();
