@@ -1,12 +1,12 @@
 ﻿namespace SCGR.Domain.Exceptions;
 
-public class DomainValidationException : Exception
+public class DomainValidationException(string error) : Exception(error)
 {
-    public DomainValidationException(string error) : base(error) { }
-
     public static void When(bool hasError, string error)
     {
         if (hasError)
+        {
             throw new DomainValidationException(error);
+        }
     }
 }

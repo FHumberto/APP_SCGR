@@ -1,4 +1,5 @@
-﻿using SCGR.Domain.Abstractions.Types;
+﻿using SCGR.Domain.Abstractions.Errors;
+using SCGR.Domain.Abstractions.Types;
 using SCGR.Domain.Entities.Transactions;
 using SCGR.Domain.Exceptions;
 
@@ -17,6 +18,18 @@ public sealed class Category : Entity
     public Category(string name)
     {
         Name = name;
+        IsValid();
+    }
+
+    public Category(int id, string name)
+    {
+        DomainValidationException.When(
+            hasError: id < 0,
+            error: EntityErrors.EntityInvalid.Description);
+
+        Id = id;
+        Name = name;
+
         IsValid();
     }
 
