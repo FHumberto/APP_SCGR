@@ -10,6 +10,7 @@ public static class DI
         services.AddProblemDetails();
         services.AddExceptionHandler<ExceptionMiddleware>();
         services.AddCorsPolicies();
+        services.AddRateLimiterPolicies();
         services.AddControllers();
         services.AddSwaggerWithVersioning();
 
