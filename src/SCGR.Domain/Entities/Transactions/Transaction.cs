@@ -1,4 +1,5 @@
-﻿using SCGR.Domain.Abstractions.Types;
+﻿using SCGR.Domain.Abstractions.Errors;
+using SCGR.Domain.Abstractions.Types;
 using SCGR.Domain.Entities.Categories;
 using SCGR.Domain.Exceptions;
 
@@ -20,6 +21,23 @@ public sealed class Transaction : Entity
 
     public Transaction(TransactionType transactionType, string description, decimal amount, DateOnly transactionDate, int categoryId)
     {
+        TransactionType = transactionType;
+        Description = description;
+        Amount = amount;
+        TransactionDate = transactionDate;
+        CategoryId = categoryId;
+
+        IsValid();
+    }
+
+    public Transaction(int id, TransactionType transactionType, string description, decimal amount, DateOnly transactionDate, int categoryId)
+    {
+        DomainValidationException.When(
+            hasError: id < 0,
+            error: EntityErrors.EntityInvalid.Description);
+
+        Id = id;
+
         TransactionType = transactionType;
         Description = description;
         Amount = amount;
