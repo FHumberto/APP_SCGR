@@ -64,7 +64,7 @@ public sealed class Transaction : Entity
             error: TransactionErrors.DescriptionIsNullOrEmpty.Description);
 
         DomainValidationException.When(
-            Description.Length > 200,
+            hasError: Description.Length > 200,
             error: TransactionErrors.DescriptionTooLong.Description);
 
         DomainValidationException.When(
