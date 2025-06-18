@@ -1,9 +1,6 @@
-﻿using SCGR.Domain.Abstractions.Errors;
-using SCGR.Domain.Entities.Categories;
-using SCGR.Domain.Exceptions;
-using Shouldly;
+﻿using SCGR.Domain.Entities.Categories;
 
-namespace SCGR.Domain.UnitTests;
+namespace SCGR.Domain.UnitTests.Categories;
 
 /// <summary>
 /// Contém testes unitários da entidade <see cref="Category"/> para validar as regras de negócio.
@@ -18,7 +15,7 @@ namespace SCGR.Domain.UnitTests;
 ///   <item><description>Criação de categoria com nome nulo (esperado: exceção de validação).</description></item>
 /// </list>
 /// </remarks>
-public sealed class CategoryUnitTest
+public sealed class CategoryCreationTests
 {
     /// <summary>
     /// Testa a criação de uma categoria com ID e nome válidos.
@@ -100,6 +97,6 @@ public sealed class CategoryUnitTest
         Action action = () => _ = new Category(1, null!);
 
         // Assert
-        action.ShouldThrow<DomainValidationException>();
+        _ = action.ShouldThrow<DomainValidationException>();
     }
 }

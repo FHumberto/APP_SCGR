@@ -1,9 +1,6 @@
-﻿using SCGR.Domain.Abstractions.Errors;
-using SCGR.Domain.Entities.Transactions;
-using SCGR.Domain.Exceptions;
-using Shouldly;
+﻿using SCGR.Domain.Entities.Transactions;
 
-namespace SCGR.Domain.UnitTests;
+namespace SCGR.Domain.UnitTests.Transactions;
 
 /// <summary>
 /// Contém testes unitários da entidade <see cref="Transaction"/> para validar as regras de negócio.
@@ -21,7 +18,7 @@ namespace SCGR.Domain.UnitTests;
 ///   <item><description>Atualização de dados válidos (esperado: sucesso).</description></item>
 /// </list>
 /// </remarks>
-public sealed class TransactionUnitTest
+public sealed class TransactionCreationTests
 {
     /// <summary>
     /// Testa a criação de uma transação com parâmetros válidos.
@@ -29,7 +26,7 @@ public sealed class TransactionUnitTest
     [Fact]
     public void CreateTransaction_WithValidParameters_ShouldNotThrow()
     {
-        var date = new DateOnly(2024, 10, 10);
+        DateOnly date = new(2024, 10, 10);
 
         Action action = () => _ = new Transaction(TransactionType.Income, "Salário", 1000, date, 1);
 
@@ -42,7 +39,7 @@ public sealed class TransactionUnitTest
     [Fact]
     public void CreateTransaction_WithNegativeId_ShouldThrowDomainValidationException()
     {
-        var date = new DateOnly(2024, 10, 10);
+        DateOnly date = new(2024, 10, 10);
 
         Action action = () => _ = new Transaction(-1, TransactionType.Expense, "Compra", 100, date, 1);
 
@@ -56,7 +53,7 @@ public sealed class TransactionUnitTest
     [Fact]
     public void CreateTransaction_WithEmptyDescription_ShouldThrowDomainValidationException()
     {
-        var date = new DateOnly(2024, 10, 10);
+        DateOnly date = new(2024, 10, 10);
 
         Action action = () => _ = new Transaction(TransactionType.Income, "", 500, date, 1);
 
@@ -70,8 +67,8 @@ public sealed class TransactionUnitTest
     [Fact]
     public void CreateTransaction_WithTooLongDescription_ShouldThrowDomainValidationException()
     {
-        var date = new DateOnly(2024, 10, 10);
-        var longDescription = new string('a', 201);
+        DateOnly date = new(2024, 10, 10);
+        string longDescription = new('a', 201);
 
         Action action = () => _ = new Transaction(TransactionType.Income, longDescription, 500, date, 1);
 
@@ -85,7 +82,7 @@ public sealed class TransactionUnitTest
     [Fact]
     public void CreateTransaction_WithZeroAmount_ShouldThrowDomainValidationException()
     {
-        var date = new DateOnly(2024, 10, 10);
+        DateOnly date = new(2024, 10, 10);
 
         Action action = () => _ = new Transaction(TransactionType.Income, "Venda", 0, date, 1);
 
@@ -111,7 +108,7 @@ public sealed class TransactionUnitTest
     [Fact]
     public void CreateTransaction_WithInvalidCategoryId_ShouldThrowDomainValidationException()
     {
-        var date = new DateOnly(2024, 10, 10);
+        DateOnly date = new(2024, 10, 10);
 
         Action action = () => _ = new Transaction(TransactionType.Income, "Investimento", 100, date, 0);
 
@@ -125,10 +122,10 @@ public sealed class TransactionUnitTest
     [Fact]
     public void UpdateTransaction_WithValidData_ShouldUpdateSuccessfully()
     {
-        var date = new DateOnly(2024, 10, 10);
-        var transaction = _ = new Transaction(TransactionType.Income, "Bônus", 150, date, 1);
+        DateOnly date = new(2024, 10, 10);
+        Transaction transaction = _ = new Transaction(TransactionType.Income, "Bônus", 150, date, 1);
 
-        var newDate = new DateOnly(2024, 12, 1);
+        DateOnly newDate = new(2024, 12, 1);
         transaction.Update("Bônus Atualizado", 200, newDate, 2);
 
         transaction.Description.ShouldBe("Bônus Atualizado");
