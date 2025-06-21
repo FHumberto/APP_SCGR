@@ -46,12 +46,14 @@ public sealed class Transaction : Entity
         IsValid();
     }
 
-    public void Update(string description, decimal amount, DateOnly transactionDate, int categoryId)
+    public void Update(TransactionType transactionType, string description, decimal amount, DateOnly transactionDate, int categoryId)
     {
+        TransactionType = transactionType;
         Description = description;
         Amount = amount;
         TransactionDate = transactionDate;
         CategoryId = categoryId;
+        UpdatedAt = DateTime.UtcNow;
 
         IsValid();
     }

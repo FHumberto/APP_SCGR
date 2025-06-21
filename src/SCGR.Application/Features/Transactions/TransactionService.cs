@@ -130,6 +130,7 @@ public sealed class TransactionService : ITransactionService
     public async Task<Result> UpdateTransactionAsync(int id, TransactionCommandDto request)
     {
         ValidationResult validationResult = await _transactionCommandValidator.ValidateAsync(request);
+
         if (!validationResult.IsValid)
         {
             Error error = ValidationHelper.ToValidationError(validationResult);
@@ -137,10 +138,17 @@ public sealed class TransactionService : ITransactionService
         }
 
         Transaction? transaction = await _transactionRepository.GetByIdAsync(id);
+        
         if (transaction is null)
         {
             return TransactionErrors.TransactionNotFound;
         }
+
+        transaction.Update(request.TransactionType,
+                           request.Description,
+                           request.Amount,
+                           request.TransactionDate,
+                           request.CategoryId);
 
         await _transactionRepository.UpdateAsync(transaction);
         return Result.Success();

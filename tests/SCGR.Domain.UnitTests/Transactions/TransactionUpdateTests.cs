@@ -30,7 +30,7 @@ public sealed class TransactionUpdateTests
         DateOnly updatedDate = new(2024, 12, 25);
 
         // Act
-        transaction.Update("Atualizada", 500, updatedDate, 2);
+        transaction.Update(TransactionType.Income, "Atualizada", 500, updatedDate, 2);
 
         // Assert
         transaction.Description.ShouldBe("Atualizada");
@@ -46,10 +46,18 @@ public sealed class TransactionUpdateTests
     public void UpdateTransaction_WithEmptyDescription_ShouldThrowDomainValidationException()
     {
         // Arrange
-        Transaction transaction = new(TransactionType.Expense, "Compra", 200, new DateOnly(2024, 1, 1), 1);
+        Transaction transaction = new(TransactionType.Expense,
+                                      "Compra",
+                                      200,
+                                      new DateOnly(2024, 1, 1),
+                                      1);
 
         // Act
-        Action action = () => transaction.Update("", 200, new DateOnly(2024, 1, 1), 1);
+        Action action = () => transaction.Update(TransactionType.Expense,
+                                                 "",
+                                                 200,
+                                                 new DateOnly(2024, 1, 1),
+                                                 1);
 
         // Assert
         DomainValidationException exception = action.ShouldThrow<DomainValidationException>();
@@ -67,7 +75,11 @@ public sealed class TransactionUpdateTests
         string longDescription = new('x', 201);
 
         // Act
-        Action action = () => transaction.Update(longDescription, 100, new DateOnly(2024, 1, 1), 1);
+        Action action = () => transaction.Update(TransactionType.Expense,
+                                                 longDescription,
+                                                 100,
+                                                 new DateOnly(2024, 1, 1),
+                                                 1);
 
         // Assert
         DomainValidationException exception = action.ShouldThrow<DomainValidationException>();
@@ -81,10 +93,18 @@ public sealed class TransactionUpdateTests
     public void UpdateTransaction_WithZeroAmount_ShouldThrowDomainValidationException()
     {
         // Arrange
-        Transaction transaction = new(TransactionType.Expense, "Compra", 100, new DateOnly(2024, 1, 1), 1);
+        Transaction transaction = new(TransactionType.Expense,
+                                      "Compra",
+                                      100,
+                                      new DateOnly(2024, 1, 1),
+                                      1);
 
         // Act
-        Action action = () => transaction.Update("Nova Compra", 0, new DateOnly(2024, 1, 1), 1);
+        Action action = () => transaction.Update(TransactionType.Expense,
+                                                 "Nova Compra",
+                                                 0,
+                                                 new DateOnly(2024, 1, 1),
+                                                 1);
 
         // Assert
         DomainValidationException exception = action.ShouldThrow<DomainValidationException>();
@@ -98,10 +118,18 @@ public sealed class TransactionUpdateTests
     public void UpdateTransaction_WithInvalidDate_ShouldThrowDomainValidationException()
     {
         // Arrange
-        Transaction transaction = new(TransactionType.Expense, "Compra", 100, new DateOnly(2024, 1, 1), 1);
+        Transaction transaction = new(TransactionType.Expense,
+                                      "Compra",
+                                      100,
+                                      new DateOnly(2024, 1, 1),
+                                      1);
 
         // Act
-        Action action = () => transaction.Update("Nova Compra", 100, default, 1);
+        Action action = () => transaction.Update(TransactionType.Income,
+                                                 "Nova Compra",
+                                                 100,
+                                                 default,
+                                                 1);
 
         // Assert
         DomainValidationException exception = action.ShouldThrow<DomainValidationException>();
@@ -115,10 +143,18 @@ public sealed class TransactionUpdateTests
     public void UpdateTransaction_WithInvalidCategoryId_ShouldThrowDomainValidationException()
     {
         // Arrange
-        Transaction transaction = new(TransactionType.Expense, "Compra", 100, new DateOnly(2024, 1, 1), 1);
+        Transaction transaction = new(TransactionType.Expense,
+                                      "Compra",
+                                      100,
+                                      new DateOnly(2024, 1, 1),
+                                      1);
 
         // Act
-        Action action = () => transaction.Update("Nova Compra", 100, new DateOnly(2024, 1, 1), 0);
+        Action action = () => transaction.Update(TransactionType.Expense,
+                                                 "Nova Compra",
+                                                 100,
+                                                 new DateOnly(2024, 1, 1),
+                                                 0);
 
         // Assert
         DomainValidationException exception = action.ShouldThrow<DomainValidationException>();

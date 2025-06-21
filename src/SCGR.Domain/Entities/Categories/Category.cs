@@ -36,6 +36,8 @@ public sealed class Category : Entity
     public void Update(string name)
     {
         Name = name;
+        UpdatedAt = DateTime.UtcNow;
+
         IsValid();
     }
 

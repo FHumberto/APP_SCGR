@@ -115,22 +115,4 @@ public sealed class TransactionCreationTests
         DomainValidationException exception = action.ShouldThrow<DomainValidationException>();
         exception.Message.ShouldBe(TransactionErrors.InvalidCategoryId.Description);
     }
-
-    /// <summary>
-    /// Testa a atualização dos dados de uma transação com valores válidos.
-    /// </summary>
-    [Fact]
-    public void UpdateTransaction_WithValidData_ShouldUpdateSuccessfully()
-    {
-        DateOnly date = new(2024, 10, 10);
-        Transaction transaction = _ = new Transaction(TransactionType.Income, "Bônus", 150, date, 1);
-
-        DateOnly newDate = new(2024, 12, 1);
-        transaction.Update("Bônus Atualizado", 200, newDate, 2);
-
-        transaction.Description.ShouldBe("Bônus Atualizado");
-        transaction.Amount.ShouldBe(200);
-        transaction.TransactionDate.ShouldBe(newDate);
-        transaction.CategoryId.ShouldBe(2);
-    }
 }

@@ -1,8 +1,11 @@
-﻿namespace SCGR.Domain.Abstractions.Types;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SCGR.Domain.Abstractions.Types;
 
 public abstract class Entity
 {
-    public int Id { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; protected set; }
+    public DateTime CreatedAt { get; protected set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; protected set; } = DateTime.UtcNow;
 }

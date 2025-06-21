@@ -57,7 +57,6 @@ public class Repository<T>(ScgrDbContext context) : IRepository<T> where T : Ent
 
     public async Task UpdateAsync(T entity)
     {
-        entity.UpdatedAt = DateTime.UtcNow;
         _context.Entry(entity).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }
