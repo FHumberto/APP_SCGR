@@ -3,7 +3,7 @@ using SCGR.API.Middlewares;
 
 namespace SCGR.API;
 
-public static class DI
+public static class DependencyInjection
 {
     public static IServiceCollection AddPresentationLayer(this IServiceCollection services)
     {

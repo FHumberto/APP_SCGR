@@ -24,7 +24,7 @@ public static class TransactionMap
     {
         return new Paged<TransactionResponseDto>
         (
-            pagedTransaction.Items.Select(t => t.ToResponseDto()).ToList(),
+            [.. pagedTransaction.Items.Select(t => t.ToResponseDto())],
             pagedTransaction.TotalRecords,
             pagedTransaction.PageNumber,
             pagedTransaction.PageSize

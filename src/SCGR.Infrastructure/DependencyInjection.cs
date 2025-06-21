@@ -8,7 +8,7 @@ using SCGR.Infrastructure.Repositories;
 
 namespace SCGR.Infrastructure;
 
-public static class DI
+public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services, IConfiguration configuration)
     {

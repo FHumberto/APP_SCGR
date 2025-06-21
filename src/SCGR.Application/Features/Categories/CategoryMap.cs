@@ -14,7 +14,7 @@ public static class CategoryMap
     {
         return new Paged<CategoryResponseDto>
         (
-            pagedCategory.Items.Select(c => c.ToResponseDto()).ToList(),
+            [.. pagedCategory.Items.Select(c => c.ToResponseDto())],
             pagedCategory.TotalRecords,
             pagedCategory.PageNumber,
             pagedCategory.PageSize

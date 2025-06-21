@@ -8,7 +8,7 @@ using SCGR.Application.Features.Transactions;
 
 namespace SCGR.Application;
 
-public static class DI
+public static class DependencyInjection
 {
     public static IServiceCollection AddApplicationLayer(this IServiceCollection services)
     {
