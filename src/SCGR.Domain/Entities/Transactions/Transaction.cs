@@ -37,7 +37,6 @@ public sealed class Transaction : Entity
             error: EntityErrors.EntityInvalid.Description);
 
         Id = id;
-
         TransactionType = transactionType;
         Description = description;
         Amount = amount;

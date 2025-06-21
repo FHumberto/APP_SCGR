@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using SCGR.Application.Common.Params;
+using SCGR.Application.Common.Validators;
 using SCGR.Application.Features.Categories.Requests;
 
 namespace SCGR.Application.Features.Categories.Validators;

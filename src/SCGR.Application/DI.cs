@@ -1,8 +1,10 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using SCGR.Application.Common.Params;
+using SCGR.Application.Common.Validators;
 using SCGR.Application.Contracts.Services;
 using SCGR.Application.Features.Categories;
+using SCGR.Application.Features.Transactions;
 
 namespace SCGR.Application;
 
@@ -18,6 +20,7 @@ public static class DI
         services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
         services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<ITransactionService, TransactionService>();
 
         return services;
     }
