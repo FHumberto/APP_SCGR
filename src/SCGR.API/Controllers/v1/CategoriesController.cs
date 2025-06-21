@@ -53,6 +53,7 @@ public sealed class CategoriesController(ICategoryService categoryService) : Bas
     [HttpPost]
     [ProducesResponseType(typeof(CategoryResponseDto), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status409Conflict)]
     [SwaggerOperation(Summary = "Criar nova categoria", Description = "Cria uma nova categoria com base nos dados fornecidos.")]
     public async Task<IActionResult> CreateCategory([FromBody] CategoryCommandDto request)
     {
