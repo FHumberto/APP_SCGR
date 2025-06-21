@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using SCGR.Application.Common.Params;
-using SCGR.Application.Common.Validation;
 using SCGR.Application.Contracts.Services;
 using SCGR.Application.Features.Categories;
 

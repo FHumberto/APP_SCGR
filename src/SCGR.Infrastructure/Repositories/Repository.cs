@@ -42,7 +42,7 @@ public class Repository<T>(ScgrDbContext context) : IRepository<T> where T : Ent
             .FirstOrDefaultAsync(e => e.Id == id);
     }
 
-    public async Task<bool> ExistsAsync(int id) 
+    public async Task<bool> ExistsAsync(int id)
         => await _context.Set<T>().AnyAsync(e => e.Id == id);
 
     #endregion

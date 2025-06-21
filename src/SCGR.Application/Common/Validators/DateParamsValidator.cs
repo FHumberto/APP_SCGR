@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using SCGR.Application.Common.Params;
 
-namespace SCGR.Application.Common.Validation;
+namespace SCGR.Application.Common.Validators;
 
 public class DateParamsValidator<T> : AbstractValidator<T> where T : DateParams
 {
